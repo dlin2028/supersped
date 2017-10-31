@@ -10,11 +10,21 @@ public class Ship : MonoBehaviour
     public float TurnSpeed = 1;
     [Range(0, 500)]
     public float StopSpeed;
+    [Range(0, 500)]
+    public float TurboSpeed;
+    [Range(0, 500)]
+    public float SlowTurnSpeed;
+    [Range(0, 500)]
+    public float SlowTurnDrag;
+
     public KeyCode UpKey = KeyCode.W;
     public KeyCode DownKey = KeyCode.S;
     public KeyCode LeftKey = KeyCode.A;
     public KeyCode RightKey = KeyCode.D;
     public KeyCode resetKey = KeyCode.Space;
+
+    public KeyCode TurboKey = KeyCode.LeftShift;
+    public KeyCode TurnSlowKey = KeyCode.LeftControl;
 
     private Rigidbody body;
 
@@ -24,10 +34,16 @@ public class Ship : MonoBehaviour
     }
 
     // Update is called once per frame
+    
     void FixedUpdate()
     {
+
         if (Input.GetKey(UpKey))
         {
+            if(Input.GetKey(TurboKey))
+            {
+                body.AddRelativeForce(Vector3.forward * TurboSpeed);
+            }
             body.AddRelativeForce(Vector3.forward * Speed);
         }
         if (Input.GetKey(DownKey))
@@ -36,16 +52,37 @@ public class Ship : MonoBehaviour
         }
         else
         {
-            body.drag = 1;
+            body.drag = .935f;
         }
-        if (Input.GetKey(LeftKey))
+
+
+        if (Input.GetKey(TurnSlowKey))
         {
-            body.AddRelativeTorque(Vector3.down * TurnSpeed);
+
+            body.angularDrag = SlowTurnDrag;
+            if (Input.GetKey(LeftKey))
+            {
+                body.AddRelativeTorque(Vector3.down * SlowTurnSpeed / 2);
+            }
+            if (Input.GetKey(RightKey))
+            {
+                body.AddRelativeTorque(Vector3.up * SlowTurnSpeed / 2);
+            }
         }
-        if (Input.GetKey(RightKey))
+        else
         {
-            body.AddRelativeTorque(Vector3.up * TurnSpeed);
+            body.angularDrag = 5;
+            if (Input.GetKey(LeftKey))
+            {
+                body.AddRelativeTorque(Vector3.down * TurnSpeed);
+            }
+            if (Input.GetKey(RightKey))
+            {
+                body.AddRelativeTorque(Vector3.up * TurnSpeed);
+            }
         }
+
+
         if(Input.GetKey(resetKey))
         {
             transform.position = Vector3.zero;
