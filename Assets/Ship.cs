@@ -16,6 +16,7 @@ public class Ship : MonoBehaviour
     public float SlowTurnSpeed;
     [Range(0, 500)]
     public float SlowTurnDrag;
+    
 
     public KeyCode UpKey = KeyCode.W;
     public KeyCode DownKey = KeyCode.S;
@@ -52,7 +53,7 @@ public class Ship : MonoBehaviour
         }
         else
         {
-            body.drag = .935f;
+            body.drag = .9f;
         }
 
 
@@ -71,7 +72,7 @@ public class Ship : MonoBehaviour
         }
         else
         {
-            body.angularDrag = 5;
+            body.angularDrag = 6.85f;
             if (Input.GetKey(LeftKey))
             {
                 body.AddRelativeTorque(Vector3.down * TurnSpeed);
