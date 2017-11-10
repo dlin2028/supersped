@@ -66,12 +66,12 @@ public class Ship : MonoBehaviour
             body.AddRelativeForce(Vector3.forward * Speed * -0.5f);
             if (Input.GetKey(LeftKey))
             {
-                body.AddRelativeForce(Vector3.right * (50 + (300 / ((body.velocity.x) * (body.velocity.z)))));
+                body.AddRelativeForce(Vector3.right * (55 + (295 / ((body.velocity.x) * (body.velocity.z)))));
                 body.AddRelativeTorque(Vector3.down * TurnSpeed * 1.5f);
             }
             if (Input.GetKey(RightKey))
             {
-                body.AddRelativeForce(Vector3.left * (50 + (300 / ((body.velocity.x) * (body.velocity.z)))));
+                body.AddRelativeForce(Vector3.left * (55 + (295 / ((body.velocity.x) * (body.velocity.z)))));
                 body.AddRelativeTorque(Vector3.up * TurnSpeed * 1.5f);
             }
         }
