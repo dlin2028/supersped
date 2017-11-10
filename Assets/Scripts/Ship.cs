@@ -2,19 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Ship : MonoBehaviour
 {
-    [Range(0, 1000)]
     public float Speed = 1;
-    [Range(0, 1000)]
     public float TurnSpeed = 1;
-    [Range(0, 500)]
     public float StopSpeed;
-    [Range(0, 500)]
     public float TurboSpeed;
-    [Range(0, 500)]
     public float SlowTurnSpeed;
-    [Range(0, 500)]
     public float SlowTurnDrag;
 
 
@@ -66,12 +61,12 @@ public class Ship : MonoBehaviour
             body.AddRelativeForce(Vector3.forward * Speed * -0.5f);
             if (Input.GetKey(LeftKey))
             {
-                body.AddRelativeForce(Vector3.right * (55 + (295 / ((body.velocity.x) * (body.velocity.z)))));
+                body.AddRelativeForce(Vector3.right * (52.5f + (295 / ((body.velocity.x) * (body.velocity.z)))));
                 body.AddRelativeTorque(Vector3.down * TurnSpeed * 1.5f);
             }
             if (Input.GetKey(RightKey))
             {
-                body.AddRelativeForce(Vector3.left * (55 + (295 / ((body.velocity.x) * (body.velocity.z)))));
+                body.AddRelativeForce(Vector3.left * (52.5f + (295 / ((body.velocity.x) * (body.velocity.z)))));
                 body.AddRelativeTorque(Vector3.up * TurnSpeed * 1.5f);
             }
         }

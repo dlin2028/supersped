@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FinishLine : MonoBehaviour
 {
+    public Transform ShipParent;
 
     public List<Collider> PlayerColliders = new List<Collider>();
 
@@ -15,6 +16,11 @@ public class FinishLine : MonoBehaviour
 
     private void Awake()
     {
+        foreach (Transform child in ShipParent)
+        {
+            PlayerColliders.Add(child.GetComponentInChildren<Collider>());
+        }
+
         for (int i = 0; i < PlayerColliders.Count; i++)
         {
             playerData.Add(new PlayerData(PlayerColliders[i].transform));
