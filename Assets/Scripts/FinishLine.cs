@@ -36,7 +36,30 @@ public class FinishLine : MonoBehaviour
     {
         foreach (PlayerData player in playerData)
         {
-            player.CurrentTime += new TimeSpan(0, 0, 0, (int)Math.Round(Time.deltaTime * 1000, 0));
+            player.CurrentTime += new TimeSpan(0, 0, 0, 0, (int)Math.Round(Time.deltaTime * 1000, 0));
+        }
+    }
+
+    public void ResetCheckPoints(Transform player)
+    {
+        Collider collider = player.GetComponentInChildren<Collider>();
+
+        for (int i = 0; i < CheckPoints.Count; i++)
+        {
+            if (CheckPoints[i].PlayersPassed.Contains(collider.transform))
+            {
+                CheckPoints[i].PlayersPassed.Remove(collider.transform);
+                break;
+            }
+        }
+
+        for (int i = 0; i < playerData.Count; i++)
+        {
+            if(playerData[i].Transform == collider.transform)
+            {
+                playerData[i].CurrentTime = TimeSpan.Zero;
+                break;
+            }
         }
     }
 
@@ -70,6 +93,7 @@ public class FinishLine : MonoBehaviour
 
                     playerData[i].CurrentTime = TimeSpan.Zero;
                     playerData[i].Laps++;
+                    break;
                 }
             }
         }

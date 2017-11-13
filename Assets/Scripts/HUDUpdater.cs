@@ -10,7 +10,8 @@ public class HUDUpdater : MonoBehaviour {
 
     public Text Text;
 
-    private PlayerData data;
+    [HideInInspector]
+    public PlayerData data;
 
     private void Start()
     {
@@ -25,6 +26,11 @@ public class HUDUpdater : MonoBehaviour {
     }
 
     void Update () {
-        Text.text = "Time: " + data.CurrentTime.ToString() + "\nLap: " + data.Laps.ToString() + "\nBest Lap: " + data.BestTime;
+        Text.text = "Time: " + data.CurrentTime.ToString() + "\nLap: " + data.Laps.ToString();
+
+        if (data.BestTime < new TimeSpan(1, 0, 0))
+        {
+            Text.text += "\nBest Lap: " + data.BestTime;
+        }
 	}
 }
