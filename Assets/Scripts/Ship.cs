@@ -87,7 +87,7 @@ public class Ship : MonoBehaviour
             body.mass = SpecialBehavor.Mass;
             
             body.drag = SpecialBehavor.Drag;
-            body.angularDrag = SpecialBehavor.Drag;
+            body.angularDrag = SpecialBehavor.AngularDrag;
 
             collider.material = SpecialBehavor.PhysicMaterial;
 
@@ -109,12 +109,12 @@ public class Ship : MonoBehaviour
             if (Input.GetKey(leftKey))
             {
                 body.AddRelativeTorque(Vector3.down * SpecialBehavor.TurnSpeed);
-                body.AddRelativeForce(Vector3.left * SpecialBehavor.DriftAmount * (52.5f + (295 / ((body.velocity.x) * (body.velocity.z)))));
+                body.AddRelativeForce(Vector3.left * (275f * SpecialBehavor.DriftAmount * + ((2 0 * -SpecialBehavor.DriftAmount) / ((body.velocity.x) * (body.velocity.z)))));
             }
             if (Input.GetKey(rightKey))
             {
                 body.AddRelativeTorque(Vector3.up * SpecialBehavor.TurnSpeed);
-                body.AddRelativeForce(Vector3.right * SpecialBehavor.DriftAmount * (52.5f + (295 / ((body.velocity.x) * (body.velocity.z)))));
+                body.AddRelativeForce(Vector3.right * (275f * SpecialBehavor.DriftAmount * + ((20 * (-SpecialBehavor.DriftAmount) / ((body.velocity.x) * (body.velocity.z))))));
             }
         }
         else
