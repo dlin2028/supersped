@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Tracks/joshtrack2v1.unity
     guid: a995cb5818b93b0418674fef7a8c9e49
   - enabled: 1
