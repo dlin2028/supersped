@@ -30,7 +30,7 @@ public class HUDUpdater : MonoBehaviour {
 
         if (data.BestTime < new TimeSpan(1, 0, 0))
         {
-            Text.text += "\nBest Lap: " + data.BestTime;
+            Text.text += "\nWorld Record: " + data.BestTime;
         }
 	}
 }

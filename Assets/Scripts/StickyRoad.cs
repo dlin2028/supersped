@@ -8,7 +8,7 @@ public class StickyRoad : MonoBehaviour
 
     public float TargetDistance = 0;
     public float Strength = 1000;
-    public float RotationSpeed = 10;
+    public float RotationSpeed = 1;
 
     Rigidbody body;
 
@@ -24,17 +24,25 @@ public class StickyRoad : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -transform.up, out hit, 1000f))
         {
-            if (hit.distance > TargetDistance)
-            {
-                body.AddForce(-transform.up * Strength * (hit.distance - TargetDistance), ForceMode.Acceleration);
-            }
-            else
-            {
-                body.AddForce(-transform.up * Strength * (hit.distance - TargetDistance), ForceMode.Acceleration);
-            }
+            body.AddForce(-transform.up * Strength * (hit.distance - TargetDistance), ForceMode.Acceleration);
+
             body.useGravity = false;
+
             var targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * RotationSpeed);
+            Vector3 difference = transform.eulerAngles - targetRotation.eulerAngles;
+
+            for (int i = 0; i < 3; i++)
+            {
+                if ( difference[i] > 180)
+                {
+                    difference[i] = -360 + difference[i];
+                }
+                else if (difference[i] < -180)
+                {
+                    difference[i] = 360 + difference[i];
+                }
+            }
+            body.AddRelativeTorque(RotationSpeed * difference);
         }
         else
         {

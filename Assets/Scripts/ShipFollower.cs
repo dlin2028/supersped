@@ -4,47 +4,41 @@ using UnityEngine;
 
 public class ShipFollower : MonoBehaviour {
 
-    public Transform Ship;
+    public ShipPreparer ShipPreparer;
+
+    private Transform ship;
+
+    public Vector3 MinPos = new Vector3(0,3,-5);
+    public Vector3 MaxPos = new Vector3(0,6,-10);
+    public float MinAngle = 0.15f;
+    public float MaxAngle = 0.335f;
+
+    public float SpeedMultiplier = 0.02f;
+
+    public Vector3 MovementSpeed = new Vector3(10, 0.5f, 10);
+    public float RotationSpeed = 5f;
+
     private Rigidbody shipBody;
 
-    public float MinDistance;
-    public float MaxDistance;
-
-    public float MinCameraAngle;
-    public float MaxCameraAngle;
-
-    public float SpeedMultiplier;
-    public float CameraAngle = -0.335f;
-
-    private Vector3 minPos;
-    private Vector3 maxPos;
-
     // Use this for initialization
-    
-    
 	void Start () {
-        transform.position = transform.position;
-        transform.LookAt(Ship);
+        ship = ShipPreparer.ship;
 
-        transform.position = Ship.position;
-        transform.position -= transform.forward * MinDistance;
-        minPos = transform.position;
+        transform.SetParent(ship);
 
-        transform.position = Ship.position;
-        transform.position -= transform.forward * MaxDistance;
-        maxPos = transform.position;
-
-        shipBody = Ship.GetComponentInChildren<Rigidbody>();
+        shipBody = ship.GetComponentInChildren<Rigidbody>();
     }
 	
 	// Update is called once per frame
-	void Update () {
-        transform.position = Ship.TransformPoint(Vector3.Lerp(minPos, maxPos, SpeedMultiplier * transform.InverseTransformDirection(shipBody.velocity).z));
-        transform.LookAt(Ship);
+	void FixedUpdate () {
+        transform.LookAt(ship);
 
-        transform.rotation = Quaternion.Euler(
-            Mathf.Lerp(MinCameraAngle, MaxCameraAngle, SpeedMultiplier * transform.InverseTransformDirection(shipBody.velocity).z)
-            , transform.eulerAngles.y
-            , transform.eulerAngles.z);
+        Vector3 targetPosition = ship.TransformPoint(Vector3.Lerp(MinPos, MaxPos, SpeedMultiplier * Vector3.Magnitude(shipBody.velocity)));
+        
+        transform.position = new Vector3(Mathf.Lerp(transform.position.x, targetPosition.x, MovementSpeed.x),
+            Mathf.Lerp(transform.position.y, targetPosition.y, MovementSpeed.y),
+            Mathf.Lerp(transform.position.z, targetPosition.z, MovementSpeed.z));
+
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x + Mathf.Lerp(MinAngle, MaxAngle, SpeedMultiplier), transform.eulerAngles.y, ship.eulerAngles.z);
     }
 }
