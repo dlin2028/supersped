@@ -14,12 +14,25 @@ public class Selector : MonoBehaviour {
 
     public void Start()
     {
+        foreach (Transform child in transform)
+        {
+            if (child.GetComponent<Ship>())
+            {
+                child.GetComponent<Ship>().enabled = false;
+                child.GetComponent<StickyRoad>().enabled = false;
+                child.GetComponent<Rigidbody>().isKinematic = true;
+                child.GetComponent<HUDUpdater>().enabled = false;
+                child.GetComponent<AudioSource>().enabled = true;
+                child.GetComponent<ConstantMovement>().enabled = true;
+            }
+        }
+
         currentShip = 0;
         for (int i = 1; i < Data.Count; i++)
         {
             Data[i].Object.SetActive(false);
         }
-        UpdateShip();
+        UpdateData();
     }
 
     public void Previous()
@@ -34,7 +47,7 @@ public class Selector : MonoBehaviour {
         {
             currentShip = Data.Count - 1;
         }
-        UpdateShip();
+        UpdateData();
     }
     public void Next()
     {
@@ -48,10 +61,10 @@ public class Selector : MonoBehaviour {
         {
             currentShip = 0;
         }
-        UpdateShip();
+        UpdateData();
     }
 
-    public void UpdateShip()
+    public void UpdateData()
     {
         ItemData data = Data[currentShip];
 

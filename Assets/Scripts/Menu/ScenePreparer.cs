@@ -4,9 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ScenePreparer : Singleton<ScenePreparer> {
-
+public class ScenePreparer : Singleton<ScenePreparer>
+{
     public static string ShipName;
+
+    private AsyncOperation async;
+
+    private void Start()
+    {
+        async = SceneManager.LoadSceneAsync("TrackSelector");
+        async.allowSceneActivation = false;
+    }
 
     public void SelectShip(Text Text)
     {
@@ -15,7 +23,8 @@ public class ScenePreparer : Singleton<ScenePreparer> {
     public void SelectShip(string name)
     {
         ShipName = name;
-        SceneManager.LoadScene("TrackSelector");
+        async.allowSceneActivation = true;
+
     }
     public void SelectTrack(string name)
     {

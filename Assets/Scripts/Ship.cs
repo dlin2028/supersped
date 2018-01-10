@@ -48,7 +48,7 @@ public class Ship : MonoBehaviour
     private Rigidbody body;
     new private Collider collider;
 
-    public bool fixNormals = true;
+    public bool fixNormals = true; // REMOVE LATER
     void Start()
     {
         upKey = ShipPreparer.UpKey;

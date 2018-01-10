@@ -86,7 +86,7 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       lowPercent: 1
-      highPercent: 7.7903614
+      highPercent: 7.790365
       minLuminance: -5
       maxLuminance: 1
       keyValue: 0.25
@@ -102,7 +102,7 @@ MonoBehaviour:
       bloom:
         intensity: 0.25
         threshold: 1.1
-        softKnee: 0.339
+        softKnee: 0.223
         radius: 3.41
         antiFlicker: 0
       lensDirt:
@@ -112,7 +112,7 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       tonemapping:
-        tonemapper: 1
+        tonemapper: 2
         neutralBlackIn: 0.02
         neutralWhiteIn: 10
         neutralBlackOut: 0

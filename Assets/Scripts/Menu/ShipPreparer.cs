@@ -7,6 +7,9 @@ public class ShipPreparer : MonoBehaviour {
     [HideInInspector]
     public Transform ship;
 
+
+    public string DefaultShip = "none";
+
     public KeyCode UpKey = KeyCode.W;
     public KeyCode DownKey = KeyCode.S;
     public KeyCode LeftKey = KeyCode.A;
@@ -22,8 +25,37 @@ public class ShipPreparer : MonoBehaviour {
             if(child.name == ScenePreparer.ShipName)
             {
                 child.gameObject.SetActive(true);
+
+                ParticleSystem[] systems = GetComponentsInChildren<ParticleSystem>();
+                foreach(ParticleSystem system in systems)
+                {
+                    system.scalingMode = ParticleSystemScalingMode.Shape;
+                    system.simulationSpace = ParticleSystemSimulationSpace.World;
+                }
                 ship = child;
                 break;
+            }
+        }//REMOVE LATER
+        if(ship == null)
+        {
+            if(DefaultShip != "none")
+            {
+                foreach (Transform child in transform)
+                {
+                    if (child.name == DefaultShip)
+                    {
+                        child.gameObject.SetActive(true);
+
+                        ParticleSystem[] systems = GetComponentsInChildren<ParticleSystem>();
+                        foreach (ParticleSystem system in systems)
+                        {
+                            system.scalingMode = ParticleSystemScalingMode.Hierarchy;
+                            system.simulationSpace = ParticleSystemSimulationSpace.World;
+                        }
+                        ship = child;
+                        break;
+                    }
+                }
             }
         }
     }

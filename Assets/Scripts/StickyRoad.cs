@@ -6,9 +6,9 @@ public class StickyRoad : MonoBehaviour
 {
 
 
-    public float TargetDistance = 0;
-    public float Strength = 1000;
-    public float RotationSpeed = 1;
+    public float TargetDistance = 1;
+    public float Strength = 200f;
+    public float RotationSpeed = 2f;
 
     Rigidbody body;
 
@@ -42,7 +42,7 @@ public class StickyRoad : MonoBehaviour
                     difference[i] = 360 + difference[i];
                 }
             }
-            body.AddRelativeTorque(RotationSpeed * difference);
+            body.AddRelativeTorque(-RotationSpeed * difference);
         }
         else
         {
