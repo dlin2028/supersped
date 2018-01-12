@@ -20,6 +20,7 @@ public class ShipPreparer : MonoBehaviour {
     
     private void Awake()
     {
+        ship = null;
         foreach(Transform child in transform)
         {
             if(child.name == ScenePreparer.ShipName)
