@@ -15,9 +15,4 @@ public class StartForce : MonoBehaviour {
         body.AddForce(Force);
         body.AddTorque(Torque);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

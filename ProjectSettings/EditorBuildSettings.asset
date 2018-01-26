@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 8127a473ef52c6043ae032fe5a67c154
+  - enabled: 1
     path: Assets/Scenes/Garage.unity
     guid: 938eebc2ec229c64d81c639755a5ffc5
   - enabled: 1
-    path: Assets/Scenes/Tracks/joshtrack2v1.unity
-    guid: a995cb5818b93b0418674fef7a8c9e49
-  - enabled: 1
     path: Assets/Scenes/TrackSelector.unity
     guid: 0095935ea1b7df64dbd54085f6608e6c
+  - enabled: 1
+    path: Assets/Scenes/Tracks/joshtrack2v1.unity
+    guid: a995cb5818b93b0418674fef7a8c9e49
   - enabled: 1
     path: Assets/Scenes/Tracks/joshtrack1v4.unity
     guid: bddb6ca47b92c4a478e10f5adc525265

@@ -8,31 +8,36 @@ public class Selector : MonoBehaviour {
     public List<ItemData> Data = new List<ItemData>();
     private int currentShip;
 
+    public bool Menu;
+
     public Text NameText;
     public Text DescriptionText;
     public Image Image;
 
-    public void Start()
+    public void Awake()
     {
-        foreach (Transform child in transform)
+        if(Menu)
         {
-            if (child.GetComponent<Ship>())
+            foreach (Transform child in transform)
             {
-                child.GetComponent<Ship>().enabled = false;
-                child.GetComponent<StickyRoad>().enabled = false;
-                child.GetComponent<Rigidbody>().isKinematic = true;
-                child.GetComponent<HUDUpdater>().enabled = false;
-                child.GetComponent<AudioSource>().enabled = true;
-                child.GetComponent<ConstantMovement>().enabled = true;
+                if (child.GetComponent<Ship>())
+                {
+                    child.GetComponent<Ship>().enabled = false;
+                    child.GetComponent<StickyRoad>().enabled = false;
+                    child.GetComponent<Rigidbody>().isKinematic = true;
+                    child.GetComponent<HUDUpdater>().enabled = false;
+                    child.GetComponent<AudioSource>().enabled = true;
+                    child.GetComponent<ConstantMovement>().enabled = true;
+                }
             }
-        }
 
-        currentShip = 0;
-        for (int i = 1; i < Data.Count; i++)
-        {
-            Data[i].Object.SetActive(false);
+            currentShip = 0;
+            for (int i = 1; i < Data.Count; i++)
+            {
+                Data[i].Object.SetActive(false);
+            }
+            UpdateData();
         }
-        UpdateData();
     }
 
     public void Previous()
